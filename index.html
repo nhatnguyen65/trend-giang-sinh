@@ -546,6 +546,8 @@
 
             const video = document.getElementsByClassName('input_video')[0];
             const canvas = document.getElementById('camera-preview');
+            canvas.width = 320;
+            canvas.height = 240;
             const ctx = canvas.getContext('2d');
             const statusDiv = document.getElementById('status');
 
@@ -554,7 +556,8 @@
             hands.setOptions({ maxNumHands: 2, modelComplexity: 0, minDetectionConfidence: 0.5, minTrackingConfidence: 0.5 });
 
             hands.onResults(results => {
-                ctx.clearRect(0, 0, 100, 75); ctx.drawImage(results.image, 0, 0, 100, 75);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(results.image, 0, 0, canvas.width, canvas.height);
 
                 // --- Hand Logic  ---
                 if (results.multiHandLandmarks.length === 2) {
